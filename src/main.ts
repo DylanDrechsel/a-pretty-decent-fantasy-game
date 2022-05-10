@@ -11,7 +11,8 @@ const config: Phaser.Types.Core.GameConfig = {
 		default: 'arcade',
 		arcade: {
 			// No gravity since this is a top down game
-			gravity: { y: 0 }
+			gravity: { y: 0 },
+			debug: true
 		}
 	},
 	scene: [Preloader, Game],

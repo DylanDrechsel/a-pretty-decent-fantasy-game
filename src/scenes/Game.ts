@@ -1,15 +1,9 @@
 import Phaser from 'phaser'
+import { debugDraw } from '../utils/debug'
 
 export default class HelloWorldScene extends Phaser.Scene
 {
     private cursors!: Phaser.Types.Input.Keyboard.CursorKeys
-    /**
-     * The A key.
-     * 
-     * @name Phaser.Input.Keyboard.KeyCodes.A
-     * @type {number}
-     * @since 3.0.0
-     */
     private character!: Phaser.Physics.Arcade.Sprite
 
 	constructor()
@@ -25,12 +19,12 @@ export default class HelloWorldScene extends Phaser.Scene
     create() {
         const map = this.make.tilemap({ key: 'dungeon' })
         const tileset = map.addTilesetImage('level-1-new', 'tiles')
-        const invisibleWallsTileset = map.addTilesetImage('roofs', 'invisibleWallsTiles')
+        const invisibleWallsTileset = map.addTilesetImage('level-1-new', 'tiles')
 
         map.createLayer('Map', tileset)
         const invisibleWallsLayer = map.createLayer('Invisible Walls', invisibleWallsTileset)
 
-        // Enables collison for "debugGraphic"
+        // Sets property --> next time set it in Tiled
         invisibleWallsLayer.forEachTile((tile) => {
             if (tile.index === 44728) {
                 tile.properties.collides = true
@@ -40,17 +34,11 @@ export default class HelloWorldScene extends Phaser.Scene
         // Not enabling collision for the "debugGraphics"
         invisibleWallsLayer.setCollisionByProperty({ collides: true })
 
-         
+        debugDraw(invisibleWallsLayer, this)
 
-        const debugGraphics = this.add.graphics().setAlpha(0.7)
-        invisibleWallsLayer.renderDebug(debugGraphics, {
-            tileColor: null,
-            collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255),
-            faceColor: new Phaser.Display.Color(40, 39, 37, 255)
-        })
+        this.character = this.physics.add.sprite(100, 50, 'male', 'standing-down/0.png')
+        // this.character.body.setSize(this.character.width * 0.5, this.character.height * 0.5)
 
-        this.character = this.physics.add.sprite(50, 50, 'male', 'standing-down/0.png')
-        
         this.anims.create({
             key: 'character-idle-down',
             frames: [{ key: 'male', frame: 'standing-down/0.png'}]
@@ -102,6 +90,8 @@ export default class HelloWorldScene extends Phaser.Scene
         this.character.anims.play('character-idle-down')
 
         this.physics.add.collider(this.character, invisibleWallsLayer)
+
+        this.cameras.main.startFollow(this.character, true)
     }
 
     update(time: number, delta: number) {
@@ -109,7 +99,8 @@ export default class HelloWorldScene extends Phaser.Scene
             return
         }
 
-        const speed = 100
+        const walk = 100
+        const sprint = 150
         let keyA;
         let keyS;
         let keyD;
@@ -120,28 +111,123 @@ export default class HelloWorldScene extends Phaser.Scene
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
 
-        if (keyA?.isDown) {
+        // Walk Left
+        if (keyA?.isDown && !keyW?.isDown && !keyD.isDown && !keyS.isDown && !this.cursors.shift?.isDown) {
             this.character.anims.play('character-run-left', true)
-            this.character.setVelocity(-speed, 0)
+            this.character.setVelocity(-walk, 0)
+			this.character.body.offset.x = -8
         }
 
-        if (keyD?.isDown) {
+        // Sprint Left
+        if (keyA?.isDown && !keyW?.isDown && !keyD.isDown && !keyS.isDown && this.cursors.shift?.isDown) {
+            this.character.anims.play('character-run-left', true)
+            this.character.setVelocity(-sprint, 0)
+			this.character.body.offset.x = -8
+        }
+
+        // Walk Right
+        if (keyD?.isDown && !keyS?.isDown && !keyA.isDown && !keyW.isDown && !this.cursors.shift?.isDown) {
             this.character.anims.play('character-run-right', true)
-            this.character.setVelocity(speed, 0)
+            this.character.setVelocity(walk, 0)
+			this.character.body.offset.x = 0
         }
 
-        if (keyW?.isDown) {
+        // Sprint Right
+        if (keyD?.isDown && !keyS?.isDown && !keyA.isDown && !keyW.isDown && this.cursors.shift?.isDown) {
+            this.character.anims.play('character-run-right', true)
+            this.character.setVelocity(sprint, 0)
+            this.character.body.offset.x = 0
+        }
+
+        // Walk Up
+        if (keyW?.isDown && !keyA?.isDown && !keyS?.isDown && !keyD?.isDown && !this.cursors.shift?.isDown) {
             this.character.anims.play('character-run-up', true)
-            this.character.setVelocity(0, -speed)
+            this.character.setVelocity(0, -walk)
+            this.character.body.offset.x = 0
         }
 
-        if (keyS?.isDown) {
+        // Sprint Up
+        if (keyW?.isDown && !keyA?.isDown && !keyS?.isDown && !keyD?.isDown && this.cursors.shift?.isDown) {
+            this.character.anims.play('character-run-up', true)
+            this.character.setVelocity(0, -sprint)
+            this.character.body.offset.x = 0
+        }
+
+        // Walk Down
+        if (keyS?.isDown && !keyA?.isDown && !keyW?.isDown && !keyD?.isDown && !this.cursors.shift?.isDown) {
             this.character.anims.play('character-run-down', true)
-            this.character.setVelocity(0, speed)
+            this.character.setVelocity(0, walk)
+            this.character.body.offset.x = 0
         }
 
+        // Sprint Down
+        if (keyS?.isDown && !keyA?.isDown && !keyW?.isDown && !keyD?.isDown && this.cursors.shift?.isDown) {
+            this.character.anims.play('character-run-down', true)
+            this.character.setVelocity(0, sprint)
+            this.character.body.offset.x = 0
+        }
+
+        // Walk Diagonal Up Left
+        if (keyA?.isDown && keyW?.isDown && !keyD.isDown && !keyS.isDown && !this.cursors.shift?.isDown) {
+            this.character.anims.play('character-run-left', true)
+            this.character.setVelocity(-walk, -walk)
+			this.character.body.offset.x = -8
+        }
+
+        // Sprint Diagonal Up Left
+        if (keyA?.isDown && keyW?.isDown && !keyD.isDown && !keyS.isDown && this.cursors.shift?.isDown) {
+            this.character.anims.play('character-run-left', true)
+            this.character.setVelocity(-sprint, -sprint)
+			this.character.body.offset.x = -8
+        }
+
+        // Walk Diagonal Down Left
+        if (keyA?.isDown && !keyW?.isDown && !keyD.isDown && keyS.isDown && !this.cursors.shift?.isDown) {
+            this.character.anims.play('character-run-left', true)
+            this.character.setVelocity(-walk, walk)
+			this.character.body.offset.x = -8
+        }
+
+        // Sprint Diagonal Down Left
+        if (keyA?.isDown && !keyW?.isDown && !keyD.isDown && keyS.isDown && this.cursors.shift?.isDown) {
+            this.character.anims.play('character-run-left', true)
+            this.character.setVelocity(-sprint, sprint)
+			this.character.body.offset.x = -8
+        }
+
+        // Walk Diagonal Up Right
+        if (!keyA?.isDown && keyW?.isDown && keyD.isDown && !keyS.isDown && !this.cursors.shift?.isDown) {
+            this.character.anims.play('character-run-right', true)
+            this.character.setVelocity(walk, -walk)
+			this.character.body.offset.x = -8
+        }
+
+        // Sprint Diagonal Up Right
+        if (!keyA?.isDown && keyW?.isDown && keyD.isDown && !keyS.isDown && this.cursors.shift?.isDown) {
+            this.character.anims.play('character-run-right', true)
+            this.character.setVelocity(sprint, -sprint)
+			this.character.body.offset.x = -8
+        }
+
+        // Walk Diagonal Down Right
+        if (!keyA?.isDown && !keyW?.isDown && keyD.isDown && keyS.isDown && !this.cursors.shift?.isDown) {
+            this.character.anims.play('character-run-right', true)
+            this.character.setVelocity(walk, walk)
+			this.character.body.offset.x = -8
+        }
+
+        // Sprint Diagonal Down Right
+        if (!keyA?.isDown && !keyW?.isDown && keyD.isDown && keyS.isDown && this.cursors.shift?.isDown) {
+            this.character.anims.play('character-run-right', true)
+            this.character.setVelocity(sprint, sprint)
+			this.character.body.offset.x = -8
+        }
+
+        // Idle
         if (!keyA?.isDown && !keyD?.isDown && !keyW?.isDown && !keyS?.isDown) {
-            this.character.play('character-idle-down')
+            const parts = this.character.anims.currentAnim.key.split('-')
+            parts[1] = 'idle'
+            this.character.play(parts.join('-'))
             this.character.setVelocity(0, 0)
         }
     }
