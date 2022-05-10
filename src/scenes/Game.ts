@@ -28,7 +28,7 @@ export default class HelloWorldScene extends Phaser.Scene
         const invisibleWallsTileset = map.addTilesetImage('roofs', 'invisibleWallsTiles')
 
         map.createLayer('Map', tileset)
-        const invisibleWallsLayer = map.createLayer('Invisable Walls', invisibleWallsTileset)
+        const invisibleWallsLayer = map.createLayer('Invisible Walls', invisibleWallsTileset)
 
         // Enables collison for "debugGraphic"
         invisibleWallsLayer.forEachTile((tile) => {
