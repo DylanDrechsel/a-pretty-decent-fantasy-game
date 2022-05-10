@@ -32,7 +32,7 @@ export default class HelloWorldScene extends Phaser.Scene
 
         // Enables collison for "debugGraphic"
         invisibleWallsLayer.forEachTile((tile) => {
-            if (tile.index === 11317) {
+            if (tile.index === 44728) {
                 tile.properties.collides = true
             }
         }) 
