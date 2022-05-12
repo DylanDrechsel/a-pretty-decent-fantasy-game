@@ -17,7 +17,7 @@ export default class HelloWorldScene extends Phaser.Scene
     }
 
     create() {
-        const map = this.make.tilemap({ key: 'dungeon' })
+        const map = this.make.tilemap({ key: 'level 1' })
         const tileset = map.addTilesetImage('level-1-new', 'tiles', 8, 8, 1, 2)
         const invisibleWallsTileset = map.addTilesetImage('level-1-new', 'tiles', 8, 8, 1, 2)
         const treetopTileset = map.addTilesetImage('treetop-8px', 'trees', 8, 8, 1, 2)
@@ -28,7 +28,7 @@ export default class HelloWorldScene extends Phaser.Scene
 
         // Sets property --> next time set it in Tiled
         invisibleWallsLayer.forEachTile((tile) => {
-            if (tile.index === 44730) {
+            if (tile.index === 44730 || tile.index === 44731) {
                 tile.properties.collides = true
             }
         }) 
