@@ -175,56 +175,56 @@ export default class HelloWorldScene extends Phaser.Scene
         // Walk Diagonal Up Left
         if (keyA?.isDown && keyW?.isDown && !keyD.isDown && !keyS.isDown && !this.cursors.shift?.isDown) {
             this.character.anims.play('character-run-left', true)
-            this.character.setVelocity(-walk, -walk)
+            this.character.setVelocity(-walk *.5, -walk*.5)
 			this.character.body.offset.x = -8
         }
 
         // Sprint Diagonal Up Left
         if (keyA?.isDown && keyW?.isDown && !keyD.isDown && !keyS.isDown && this.cursors.shift?.isDown) {
             this.character.anims.play('character-run-left', true)
-            this.character.setVelocity(-sprint, -sprint)
+            this.character.setVelocity(-sprint*.5, -sprint*.5)
 			this.character.body.offset.x = -8
         }
 
         // Walk Diagonal Down Left
         if (keyA?.isDown && !keyW?.isDown && !keyD.isDown && keyS.isDown && !this.cursors.shift?.isDown) {
             this.character.anims.play('character-run-left', true)
-            this.character.setVelocity(-walk, walk)
+            this.character.setVelocity(-walk*.5, walk*.5)
 			this.character.body.offset.x = -8
         }
 
         // Sprint Diagonal Down Left
         if (keyA?.isDown && !keyW?.isDown && !keyD.isDown && keyS.isDown && this.cursors.shift?.isDown) {
             this.character.anims.play('character-run-left', true)
-            this.character.setVelocity(-sprint, sprint)
+            this.character.setVelocity(-sprint*.5, sprint*.5)
 			this.character.body.offset.x = -8
         }
 
         // Walk Diagonal Up Right
         if (!keyA?.isDown && keyW?.isDown && keyD.isDown && !keyS.isDown && !this.cursors.shift?.isDown) {
             this.character.anims.play('character-run-right', true)
-            this.character.setVelocity(walk, -walk)
+            this.character.setVelocity(walk*.5, -walk*.5)
 			this.character.body.offset.x = -8
         }
 
         // Sprint Diagonal Up Right
         if (!keyA?.isDown && keyW?.isDown && keyD.isDown && !keyS.isDown && this.cursors.shift?.isDown) {
             this.character.anims.play('character-run-right', true)
-            this.character.setVelocity(sprint, -sprint)
+            this.character.setVelocity(sprint*.5, -sprint*.5)
 			this.character.body.offset.x = -8
         }
 
         // Walk Diagonal Down Right
         if (!keyA?.isDown && !keyW?.isDown && keyD.isDown && keyS.isDown && !this.cursors.shift?.isDown) {
             this.character.anims.play('character-run-right', true)
-            this.character.setVelocity(walk, walk)
+            this.character.setVelocity(walk*.5, walk*.5)
 			this.character.body.offset.x = -8
         }
 
         // Sprint Diagonal Down Right
         if (!keyA?.isDown && !keyW?.isDown && keyD.isDown && keyS.isDown && this.cursors.shift?.isDown) {
             this.character.anims.play('character-run-right', true)
-            this.character.setVelocity(sprint, sprint)
+            this.character.setVelocity(sprint*.5, sprint*.5)
 			this.character.body.offset.x = -8
         }
 
