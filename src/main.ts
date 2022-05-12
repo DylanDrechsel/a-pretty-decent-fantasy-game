@@ -2,6 +2,7 @@ import Phaser from 'phaser'
 
 import Preloader from './scenes/Preloader'
 import Game from './scenes/Game'
+import MainMenuScene from './scenes/MainMenu'
 
 const config: Phaser.Types.Core.GameConfig = {
 	type: Phaser.AUTO,
@@ -15,7 +16,7 @@ const config: Phaser.Types.Core.GameConfig = {
 			debug: true
 		}
 	},
-	scene: [Preloader, Game],
+	scene: [Preloader, Game, MainMenuScene],
 	scale: {
 		zoom: 2
 	}

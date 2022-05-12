@@ -10,9 +10,12 @@ export default class Preloader extends Phaser.Scene {
         this.load.image('trees', 'tiles/treetop-8px-extruded.png')
         this.load.tilemapTiledJSON('dungeon', 'tiles/level-1-new.json')
         this.load.atlas('male', 'character/male_walkcycle.png', 'character/male_walkcycle.json')
+        this.load.image('menu-background', 'main-menu/menu-background.png')
+		this.load.image('play-button', 'main-menu/play_button.png')
+
     }
 
     create() {
-        this.scene.start('game')
+        this.scene.start('main-menu')
     }
 }
