@@ -48,12 +48,9 @@ export default class MainMenuScene extends Phaser.Scene
 	selectButton(index: number, change: number)
 	{
 		const currentButton = this.buttons[this.selectedButtonIndex]
-
-        console.log(this.buttons[index])
         
         //this.buttons[index] = this.add.image(playButton.x, playButton.y + playButton.displayHeight + 10, 'options-button')
         //.setDisplaySize(200, 40)
-        console.log(this.buttons)
         this.buttons[index - change].setTexture(`${this.buttons[index - change].texture.key.replace('-highlighted', '')}`)
         this.buttons[index].setTexture(`${this.buttons[index].texture.key}-highlighted`)
 
@@ -70,7 +67,6 @@ export default class MainMenuScene extends Phaser.Scene
 	selectNextButton(change: number)
 	{
 		let index = this.selectedButtonIndex + change
-        console.log(index, change)
 
         // wrap the index to the front or end of array
         if (index >= this.buttons.length)
