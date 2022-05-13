@@ -24,37 +24,38 @@ export default class MainMenuScene extends Phaser.Scene
         const { width, height } = this.scale
         this.add.sprite(0, 0, 'menu-background').setOrigin(0,0).setDisplaySize(400,250);
         // Play button
-        const playButton = this.add.image(width * 0.5, height * 0.6, 'play-button')
+        const playButton = this.add.image(width * 0.5, height * 0.4, 'play-button')
             .setDisplaySize(200, 40)
-        //
-        //// Settings button
-        //const settingsButton = this.add.image(playButton.x, playButton.y + playButton.displayHeight + 10, 'menu-button-background')
-        //    .setDisplaySize(200, 40)
+        
+        const optionsButton = this.add.image(playButton.x, playButton.y + playButton.displayHeight + 10, 'options-button')
+            .setDisplaySize(200, 40)
 
-        //// Credits button
-        //const creditsButton = this.add.image(settingsButton.x, settingsButton.y + settingsButton.displayHeight + 10, 'menu-button-background')
-        //    .setDisplaySize(200, 50)
-        //
         this.buttons.push(playButton)
-        //this.buttons.push(settingsButton)
+        this.buttons.push(optionsButton)
         //this.buttons.push(creditsButton)
-        this.selectButton(0)
+        this.selectButton(0, 0)
         //this.buttonSelector = this.add.image(0, 0, 'cursor-hand')
         
 	playButton.on('selected', () => {
 		this.scene.start('game');
 	})
+    optionsButton.on('selected', () =>{
+        this.scene.start('options-screen')
+    })
 
     }
 
-	selectButton(index: number)
+	selectButton(index: number, change: number)
 	{
 		const currentButton = this.buttons[this.selectedButtonIndex]
 
-        // set the current selected button to a white tint
-        //currentButton.setTint(0xffffff)
-
-        const button = this.buttons[index]
+        console.log(this.buttons[index])
+        
+        //this.buttons[index] = this.add.image(playButton.x, playButton.y + playButton.displayHeight + 10, 'options-button')
+        //.setDisplaySize(200, 40)
+        console.log(this.buttons)
+        this.buttons[index - change].setTexture(`${this.buttons[index - change].texture.key.replace('-highlighted', '')}`)
+        this.buttons[index].setTexture(`${this.buttons[index].texture.key}-highlighted`)
 
         // set the newly selected button to a green tint
         // button.setTint(0x66ff7f)
@@ -66,9 +67,10 @@ export default class MainMenuScene extends Phaser.Scene
         this.selectedButtonIndex = index
 	}
 
-	selectNextButton(change = 1)
+	selectNextButton(change: number)
 	{
 		let index = this.selectedButtonIndex + change
+        console.log(index, change)
 
         // wrap the index to the front or end of array
         if (index >= this.buttons.length)
@@ -80,7 +82,7 @@ export default class MainMenuScene extends Phaser.Scene
             index = this.buttons.length - 1
         }
 
-        this.selectButton(index)
+        this.selectButton(index, change)
     }
 
 	confirmSelection()

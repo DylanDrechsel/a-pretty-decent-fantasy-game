@@ -12,6 +12,10 @@ export default class Preloader extends Phaser.Scene {
         this.load.atlas('male', 'character/male_walkcycle.png', 'character/male_walkcycle.json')
         this.load.image('menu-background', 'main-menu/menu-background.png')
 		this.load.image('play-button', 'main-menu/play_button.png')
+        this.load.image('options-button', 'main-menu/options_button.png')
+        this.load.image('options-button-highlighted', 'main-menu/options_button_highlighted.png')
+        this.load.image('play-button-highlighted', 'main-menu/play_button_highlight.png')
+
 
     }
 
