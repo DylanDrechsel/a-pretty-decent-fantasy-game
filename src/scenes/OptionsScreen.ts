@@ -12,6 +12,7 @@ export default class OptionsScene extends Phaser.Scene
     }
     init(){
         this.cursors = this.input.keyboard.createCursorKeys()
+        this.buttons = []
     }
     preload()
     {
