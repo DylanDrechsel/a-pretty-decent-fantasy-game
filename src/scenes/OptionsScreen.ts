@@ -1,19 +1,17 @@
 import Phaser from 'phaser'
 
-export default class MainMenuScene extends Phaser.Scene
+export default class OptionsScene extends Phaser.Scene
 {
     private cursors!: Phaser.Types.Input.Keyboard.CursorKeys
     private buttons: Phaser.GameObjects.Image[] = []
 	private selectedButtonIndex = 0
     private buttonSelector!: Phaser.GameObjects.Image
-    private hasChangedSelection = false
 
     constructor(){
-        super('main-menu')
+        super('options-screen')
     }
     init(){
         this.cursors = this.input.keyboard.createCursorKeys()
-        this.buttons = []
     }
     preload()
     {
@@ -25,41 +23,20 @@ export default class MainMenuScene extends Phaser.Scene
     {
         const { width, height } = this.scale
         this.add.sprite(0, 0, 'menu-background').setOrigin(0,0).setDisplaySize(400,250);
-        // Play button
-        const playButton = this.add.image(width * 0.5, height * 0.4, 'play-button')
+        const exitButton = this.add.image(width * 0.5, height * 0.4, 'exit-button')
             .setDisplaySize(200, 40)
-        
-        const optionsButton = this.add.image(playButton.x, playButton.y + playButton.displayHeight + 10, 'options-button')
-            .setDisplaySize(200, 40)
-
-        this.buttons.push(playButton)
-        this.buttons.push(optionsButton)
-        //this.buttons.push(creditsButton)
+        this.buttons.push(exitButton)
         this.selectButton(0, 0)
-        //this.buttonSelector = this.add.image(0, 0, 'cursor-hand')
-	playButton.on('selected', () => {
-		this.scene.start('game');
+        
+     exitButton.on('selected', () => {
+		this.scene.start('main-menu');
 	})
-    optionsButton.on('selected', () =>{
-        this.scene.start('options-screen')
-    })
+    
 
     }
 
-	selectButton(index: number, change: number)
-	{        
-        //this.buttons[index] = this.add.image(playButton.x, playButton.y + playButton.displayHeight + 10, 'options-button')
-        //.setDisplaySize(200, 40)
-        
-        this.buttons[index - change].setTexture(`${this.buttons[index - change].texture.key.replace('-highlighted', '')}`)
-        this.buttons[index].setTexture(`${this.buttons[index].texture.key}-highlighted`)
-
-        // set the newly selected button to a green tint
-        // button.setTint(0x66ff7f)
-
-        // move the hand cursor to the right edge
-
-
+	selectButton(index: number, _change: number)
+	{
         // store the new selected index
         this.selectedButtonIndex = index
 	}
@@ -84,7 +61,6 @@ export default class MainMenuScene extends Phaser.Scene
 	confirmSelection()
 	{
 		const button = this.buttons[this.selectedButtonIndex]
-
         // emit the 'selected' event
         button.emit('selected')
 	}
@@ -95,15 +71,15 @@ export default class MainMenuScene extends Phaser.Scene
 		const downJustPressed = Phaser.Input.Keyboard.JustDown(this.cursors.down!)
 		const spaceJustPressed = Phaser.Input.Keyboard.JustDown(this.cursors.space!)
 		
-		if (upJustPressed)
-		{
-			this.selectNextButton(-1)
-		}
-		else if (downJustPressed)
-		{
-			this.selectNextButton(1)
-		}
-		else if (spaceJustPressed)
+		//if (upJustPressed)
+		//{
+		//	this.selectNextButton(-1)
+		//}
+		//else if (downJustPressed)
+		//{
+		//	this.selectNextButton(1)
+		//}
+		if (spaceJustPressed)
 		{
 			this.confirmSelection()
 		}

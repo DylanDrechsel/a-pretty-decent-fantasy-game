@@ -15,6 +15,8 @@ export default class Preloader extends Phaser.Scene {
         this.load.image('options-button', 'main-menu/options_button.png')
         this.load.image('options-button-highlighted', 'main-menu/options_button_highlighted.png')
         this.load.image('play-button-highlighted', 'main-menu/play_button_highlight.png')
+        this.load.image('exit-button', 'options-menu/exit-button.png')
+
 
 
     }
