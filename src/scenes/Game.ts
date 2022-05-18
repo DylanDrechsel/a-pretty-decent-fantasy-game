@@ -28,12 +28,12 @@ export default class HelloWorldScene extends Phaser.Scene
 
         // Sets property --> next time set it in Tiled
         invisibleWallsLayer.forEachTile((tile) => {
-            if (tile.index === 44730 || tile.index === 44731) {
+            if (tile.index === 44730 || tile.index === 44731 || tile.index === 162907) {
                 tile.properties.collides = true
             }
         }) 
 
-        // Not enabling collision for the "debugGraphics"
+        // Causes collision if tile has a property called collides that is equal to true
         invisibleWallsLayer.setCollisionByProperty({ collides: true })
 
         debugDraw(invisibleWallsLayer, this)

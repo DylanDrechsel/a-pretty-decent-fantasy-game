@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "version": "0.6.7"
+  },
+  "savePath": "C:\\Users\\Drech\\Documents\\computer_science\\projects\\a-pretty-decent-fantasy-game\\all_assets\\sprites\\enemies",
+  "images": [],
+  "folders": [
+    "C:/Users/Drech/Documents/computer_science/projects/a-pretty-decent-fantasy-game/all_assets/sprites/enemies/standing-down",
+    "C:/Users/Drech/Documents/computer_science/projects/a-pretty-decent-fantasy-game/all_assets/sprites/enemies/standing-left",
+    "C:/Users/Drech/Documents/computer_science/projects/a-pretty-decent-fantasy-game/all_assets/sprites/enemies/standing-right",
+    "C:/Users/Drech/Documents/computer_science/projects/a-pretty-decent-fantasy-game/all_assets/sprites/enemies/standing-up",
+    "C:/Users/Drech/Documents/computer_science/projects/a-pretty-decent-fantasy-game/all_assets/sprites/enemies/walking-down",
+    "C:/Users/Drech/Documents/computer_science/projects/a-pretty-decent-fantasy-game/all_assets/sprites/enemies/walking-left",
+    "C:/Users/Drech/Documents/computer_science/projects/a-pretty-decent-fantasy-game/all_assets/sprites/enemies/walking-right",
+    "C:/Users/Drech/Documents/computer_science/projects/a-pretty-decent-fantasy-game/all_assets/sprites/enemies/walking-up"
+  ],
+  "packOptions": {
+    "textureName": "male_walkcycle",
+    "textureFormat": "png",
+    "removeFileExtension": false,
+    "prependFolderName": true,
+    "base64Export": false,
+    "tinify": false,
+    "tinifyKey": "",
+    "scale": 1,
+    "filter": "none",
+    "exporter": "JSON (hash)",
+    "fileName": "pack-result",
+    "savePath": "C:\\Users\\Drech\\Documents\\computer_science\\projects\\a-pretty-decent-fantasy-game\\all_assets\\sprites\\enemies",
+    "width": 2048,
+    "height": 2048,
+    "fixedSize": false,
+    "powerOfTwo": false,
+    "padding": 0,
+    "extrude": 0,
+    "allowRotation": true,
+    "allowTrim": true,
+    "trimMode": "trim",
+    "alphaThreshold": "0",
+    "detectIdentical": true,
+    "packer": "MaxRectsBin",
+    "packerMethod": "BestAreaFit"
+  }
+}
