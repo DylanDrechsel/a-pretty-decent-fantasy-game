@@ -204,28 +204,24 @@ export default class HelloWorldScene extends Phaser.Scene
         if (!keyA?.isDown && keyW?.isDown && keyD.isDown && !keyS.isDown && !this.cursors.shift?.isDown) {
             this.character.anims.play('character-run-right', true)
             this.character.setVelocity(walk*.75, -walk*.75)
-			this.character.body.offset.x = -8
         }
 
         // Sprint Diagonal Up Right
         if (!keyA?.isDown && keyW?.isDown && keyD.isDown && !keyS.isDown && this.cursors.shift?.isDown) {
             this.character.anims.play('character-run-right', true)
             this.character.setVelocity(sprint*.75, -sprint*.75)
-			this.character.body.offset.x = -8
         }
 
         // Walk Diagonal Down Right
         if (!keyA?.isDown && !keyW?.isDown && keyD.isDown && keyS.isDown && !this.cursors.shift?.isDown) {
             this.character.anims.play('character-run-right', true)
             this.character.setVelocity(walk*.75, walk*.75)
-			this.character.body.offset.x = -8
         }
 
         // Sprint Diagonal Down Right
         if (!keyA?.isDown && !keyW?.isDown && keyD.isDown && keyS.isDown && this.cursors.shift?.isDown) {
             this.character.anims.play('character-run-right', true)
             this.character.setVelocity(sprint*.75, sprint*.75)
-			this.character.body.offset.x = -8
         }
 
         // Idle
